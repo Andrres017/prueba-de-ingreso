@@ -34,33 +34,36 @@ func ValidateMiddlewarePersona(v *validator.Validate) Middleware {
 	}
 }*/
 
-func ValidateUniversal(model interface{}, typeStr string) func(next http.HandlerFunc) http.HandlerFunc {
+func ValidateUniversal(model interface{}, typeStr string, validate *validator.Validate) func(next http.HandlerFunc) http.HandlerFunc {
 	return func(next http.HandlerFunc) http.HandlerFunc {
 		return func(w http.ResponseWriter, r *http.Request) {
-			validate := validator.New()
+			var modelConvert any
 			var err error
 			switch typeStr {
 			case "persona":
-				err = json.NewDecoder(r.Body).Decode(model.(*models.Persona))
+				modelConvert = new(models.Persona)
+				err = json.NewDecoder(r.Body).Decode(modelConvert.(*models.Persona))
 			case "maritima":
-				err = json.NewDecoder(r.Body).Decode(model.(*models.LogisticaMaritima))
+				modelConvert = new(models.LogisticaMaritima)
+				err = json.NewDecoder(r.Body).Decode(modelConvert.(*models.LogisticaMaritima))
 
 			case "camion":
-				err = json.NewDecoder(r.Body).Decode(model.(*models.LogisticaCamione))
+				modelConvert = new(models.LogisticaCamione)
+				err = json.NewDecoder(r.Body).Decode(modelConvert.(*models.LogisticaCamione))
 			}
 
 			if err != nil {
-				http.Error(w, err.Error(), http.StatusBadRequest)
+				http.Error(w, err.Error(), http.StatusBadRequest) //400
 				return
 			}
-			err = validate.Struct(model)
+			err = validate.Struct(modelConvert)
 			// Validamos el modelo de la persona
 			if err != nil {
-				http.Error(w, err.Error(), http.StatusBadRequest)
+				http.Error(w, err.Error(), http.StatusUnprocessableEntity) //422
 				return
 			}
 			ctx := r.Context()
-			ctx = context.WithValue(ctx, typeStr, model)
+			ctx = context.WithValue(ctx, typeStr, modelConvert)
 			next(w, r.WithContext(ctx))
 		}
 	}

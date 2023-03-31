@@ -1,0 +1,429 @@
+{
+	"info": {
+		"_postman_id": "3f9824b3-5f3f-40e2-8399-1bcfb85edd44",
+		"name": "Examen de ingreso",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5307822"
+	},
+	"item": [
+		{
+			"name": "Personas",
+			"item": [
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/persona/api/all",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"persona",
+								"api",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/persona/api/find/6",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"persona",
+								"api",
+								"find",
+								"6"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n    \"correo\": \"andrres0177@gmail.com\",\r\n    \"clave\":\"Andresfelipe01\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9000/persona/api/login",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"persona",
+								"api",
+								"login"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/persona/api/findfilter/nombre/e",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"persona",
+								"api",
+								"findfilter",
+								"nombre",
+								"e"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteByID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/persona/api/delete/5",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"persona",
+								"api",
+								"delete",
+								"5"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear y editar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"nombre\": \"Andres dsdsdsd\",\r\n    \"apellido\": \"ramirez\",\r\n    \"direccion\": \"call 18 50 c 40\",\r\n    \"telefono\": \"2322323231\",\r\n    \"correo\": \"andrres0177@gmail.com\",\r\n    \"clave\":\"Andresfelipe01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9000/persona/api/save",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"persona",
+								"api",
+								"save"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Camiones",
+			"item": [
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/camion/api/all",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"camion",
+								"api",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/camion/api/find/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"camion",
+								"api",
+								"find",
+								"1"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteByID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/camion/api/delete/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"camion",
+								"api",
+								"delete",
+								"1"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear y editar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipoProducto\": \"ssss\",\r\n    \"cantidadProducto\": 11,\r\n    \"fechaRegistro\": \"2006-01-02T15:04:05\",\r\n    \"fechaEntrega\": \"2006-01-02T15:04:05\",\r\n    \"bodegaEntrega\": \"santa maria\",\r\n    \"precioEnvio\": \"100\",\r\n    \"placaVehiculo\": \"gpw598\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9000/camion/api/save",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"camion",
+								"api",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/camion/api/findfilter/tipo_producto/da",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"camion",
+								"api",
+								"findfilter",
+								"tipo_producto",
+								"da"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Maritima",
+			"item": [
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/maritima/api/all",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"maritima",
+								"api",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/maritima/api/find/2",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"maritima",
+								"api",
+								"find",
+								"2"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteByID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/maritima/api/delete/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"maritima",
+								"api",
+								"delete",
+								"1"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear y editar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"id\": 2,\r\n    \"tipoProducto\": \"perico\",\r\n    \"cantidadProducto\": 11,\r\n    \"fechaRegistro\": \"2022-03-28 15:46:03\",\r\n    \"fechaEntrega\": \"2021-03-28 15:46:03\",\r\n    \"puertoEntrega\": \"santa maria\",\r\n    \"precioEnvio\": \"1000000\",\r\n    \"numeroFlota\": \"gpw590h\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:9000/maritima/api/save",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"maritima",
+								"api",
+								"save"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

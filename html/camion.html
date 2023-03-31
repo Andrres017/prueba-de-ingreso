@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Camion</title>
+</head>
+<!-- Modal -->
+<div class="modal fade" id="formularioModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Formulario de logistica de camiones</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="myForm">
+                    <input type="hidden" id="id" name="id">
+                    <div class="mb-3">
+                        <label for="tipoProducto" class="form-label">Tipo de producto</label>
+                        <input type="text" class="form-control" id="tipoProducto" name="tipoProducto" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cantidadProducto" class="form-label">Cantidad de producto</label>
+                        <input type="number" class="form-control" id="cantidadProducto" name="cantidadProducto"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fechaRegistro" class="form-label">Fecha de registro</label>
+                        <input type="datetime-local" class="form-control" id="fechaRegistro" name="fechaRegistro"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fechaEntrega" class="form-label">Fecha de entrega</label>
+                        <input type="datetime-local" class="form-control" id="fechaEntrega" name="fechaEntrega"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bodegaEntrega" class="form-label">Bodega de entrega</label>
+                        <input type="text" class="form-control" id="bodegaEntrega" name="bodegaEntrega" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="precioEnvio" class="form-label">Precio de envío</label>
+                        <input type="number" class="form-control" id="precioEnvio" name="precioEnvio" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="placaVehiculo" class="form-label">Placa del vehículo</label>
+                        <input type="text" class="form-control" id="placaVehiculo" name="placaVehiculo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="numeroGuia" class="form-label">Número de guía</label>
+                        <input type="text" class="form-control" id="numeroGuia" name="numeroGuia" readonly>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button id="cerrarModal" type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Cerrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="./inicio.html">
+                                <span data-feather="home"></span>
+                                Inicio
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./persona.html">
+                                <span data-feather="user"></span>
+                                Persona
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./maritima.html">
+                                <span data-feather="tag"></span>
+                                Logistica maritima
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./camion.html">
+                                <span data-feather="tag"></span>
+                                Logistica de camiones
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./index.html">
+                                <span data-feather="log-out"></span>
+                                Salir
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+                <div class="pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Logistica de camiones</h1>
+                </div>
+                <div class="card col-md-12">
+                    <div class="card-body">
+                        <h5 class="card-title">Buscar</h5>
+                        <form>
+                            <div class="form-group">
+                                <label for="select-campo">Campo de búsqueda:</label>
+                                <select class="form-control" id="campo">
+                                    <option value="tipo_producto">Tipo de producto</option>
+                                    <option value="cantidad_producto">Cantidad de prodcuto</option>
+                                    <option value="fecha_registro">Fecha de registro</option>
+                                    <option value="fecha_entrega">fecha de entrega</option>
+                                    <option value="bodega_entrega">bodega</option>
+                                    <option value="precio_envio">fecha de entrega</option>
+                                    <option value="placa_vehiculo">bodega</option>
+                                    <option value="numero_guia">bodega</option>
+                                    <option value="id">ID</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-valor">Valor:</label>
+                                <input type="text" class="form-control" id="valor">
+                            </div>
+                            <button onclick="getFilter()" type="button" class="btn btn-primary">Buscar</button>
+                            <button onclick="create()" type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                data-bs-target="#formularioModal">Crear</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tipo de producto</th>
+                                <th>C/U</th>
+                                <th>fecha de registro</th>
+                                <th>fecha de entrega</th>
+                                <th>bodega</th>
+                                <th>precio de envio</th>
+                                <th>placa de vehiculo</th>
+                                <th>numero de guia</th>
+                                <th>acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table">
+                        </tbody>
+                    </table>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <script>
+        feather.replace();
+        getCamions()
+        function getCamions() {
+            fetch('http://localhost:9000/camion/api/all', {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    var string = ""
+                    data.forEach(camion => {
+                        string += `
+                            <tr>
+                                <td>${camion.id}</td>
+                                <td>${camion.tipoProducto}</td>
+                                <td>${camion.cantidadProducto}</td>
+                                <td>${camion.fechaRegistro}</td>
+                                <td>${camion.fechaEntrega}</td>
+                                <td>${camion.bodegaEntrega}</td>
+                                <td>${camion.precioEnvio}</td>
+                                <td>${camion.placaVehiculo}</td>
+                                <td>${camion.numeroGuia}</td>
+                                <td>
+                                    <button onclick="deleteCamion(${camion.id})" class="btn btn-danger btn-sm">Eliminar</button>
+                                    <button onclick="getCamion(${camion.id})" type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#formularioModal">Actualizar</button>
+                                </td>
+                            </tr>
+                    `
+                        console.log(camion);
+                        // Aquí puedes hacer lo que necesites con la información de cada persona
+                    });
+                    document.getElementById("table").innerHTML = string
+                })
+                .catch(error => console.error(error));
+        }
+        function deleteCamion(id) {
+            fetch('http://localhost:9000/camion/api/delete/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+            })
+                .then(response => response.json())
+                .then(data => getCamions())
+                .catch(error => alert(error));
+        }
+        function getCamion(id) {
+            fetch('http://localhost:9000/camion/api/find/' + id,
+                {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById("id").value = data.id
+                    document.getElementById("tipoProducto").value = data.tipoProducto
+                    document.getElementById("cantidadProducto").value = data.cantidadProducto
+                    document.getElementById("fechaRegistro").value = data.fechaRegistro
+                    document.getElementById("fechaEntrega").value = data.fechaEntrega
+                    document.getElementById("bodegaEntrega").value = data.bodegaEntrega
+                    document.getElementById("precioEnvio").value = data.precioEnvio
+                    document.getElementById("placaVehiculo").value = data.placaVehiculo
+                    document.getElementById("numeroGuia").value = data.numeroGuia
+                })
+                .catch(error => console.error(error));
+        }
+        const myForm = document.getElementById('myForm');
+        myForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // evitar que el formulario se envíe automáticamente
+            const formData = new FormData(myForm); // obtener los datos del formulario
+            const data = Object.fromEntries(formData); // convertir los datos en un objeto JSON
+            console.log(data)
+            data.id = data.id * 1
+            data.cantidadProducto = data.cantidadProducto * 1
+            data.precioEnvio = (data.precioEnvio * 1) + ""
+            if (data.id == "0") {
+                delete data.id;
+            }
+            // enviar el objeto JSON usando fetch
+            fetch('http://localhost:9000/camion/api/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    getCamions()
+                    document.getElementById("cerrarModal").click()
+                })
+                .catch(error => {
+                    alert('Error al enviar el formulario:', error);
+                });
+        });
+        function getFilter() {
+            let campo = document.getElementById("campo").value
+            let value = document.getElementById("valor").value
+            fetch('http://localhost:9000/camion/api/findfilter/' + campo + '/' + value, {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    var string = ""
+                    data.forEach(camion => {
+                        string += `
+                            <tr>
+                                <td>${camion.id}</td>
+                                <td>${camion.tipoProducto}</td>
+                                <td>${camion.cantidadProducto}</td>
+                                <td>${camion.fechaRegistro}</td>
+                                <td>${camion.fechaEntrega}</td>
+                                <td>${camion.bodegaEntrega}</td>
+                                <td>${camion.precioEnvio}</td>
+                                <td>${camion.placaVehiculo}</td>
+                                <td>${camion.numeroGuia}</td>
+                                <td>
+                                    <button onclick="deleteCamion(${camion.id})" class="btn btn-danger btn-sm">Eliminar</button>
+                                    <button onclick="getCamion(${camion.id})" type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#formularioModal">Actualizar</button>
+                                </td>
+                            </tr>
+                    `
+                        console.log(camion);
+                    });
+                    document.getElementById("table").innerHTML = string
+                })
+                .catch(error => console.error(error));
+        }
+
+        function create() {
+            document.getElementById("id").value = "0"
+            document.getElementById("tipoProducto").value = ""
+            document.getElementById("cantidadProducto").value = ""
+            document.getElementById("fechaRegistro").value = ""
+            document.getElementById("fechaEntrega").value = ""
+            document.getElementById("bodegaEntrega").value = ""
+            document.getElementById("precioEnvio").value = ""
+            document.getElementById("placaVehiculo").value = ""
+            document.getElementById("numeroGuia").value = ""
+        }
+
+        function logOut() {
+            localStorage.removeItem('token');
+            window.location.href = "./index.html";
+        }
+    </script>
+
+
+
+</body>
+
+</html>

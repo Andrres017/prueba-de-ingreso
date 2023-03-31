@@ -9,7 +9,7 @@ import (
 )
 
 func GetConnection() *gorm.DB {
-	db, err := gorm.Open("mysql", "root:Andresfelipe01@/prueba?charset=utf8")
+	db, err := gorm.Open("mysql", "root:root@/prueba?charset=utf8")
 
 	if err != nil {
 		log.Fatal(err)

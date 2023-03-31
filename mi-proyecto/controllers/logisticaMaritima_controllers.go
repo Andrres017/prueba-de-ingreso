@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/tu-usuario/mi-proyecto/common"
 	"github.com/tu-usuario/mi-proyecto/models"
+	"github.com/tu-usuario/mi-proyecto/utils"
 )
 
 func GetAllMaritimas(writer http.ResponseWriter, request *http.Request) {
@@ -28,14 +29,24 @@ func GetMaritima(write http.ResponseWriter, request *http.Request) {
 
 	db.Find(&maritima, id)
 
-	if &maritima.ID != nil {
+	if maritima.ID != nil {
 		json, _ := json.Marshal(maritima)
 		common.SendResponse(write, http.StatusOK, json)
 	} else {
 		common.SendError(write, http.StatusNotFound)
 	}
 }
+func GetFilterMaritima(write http.ResponseWriter, request *http.Request) {
+	campo := mux.Vars(request)["campo"]
+	value := mux.Vars(request)["valor"]
+	maritima := []models.LogisticaMaritima{}
+	db := common.GetConnection()
 
+	defer db.Close()
+	db.Where(campo+" LIKE ?", "%"+value+"%").Find(&maritima)
+	json, _ := json.Marshal(maritima)
+	common.SendResponse(write, http.StatusOK, json)
+}
 func SaveMaritima(write http.ResponseWriter, request *http.Request) {
 
 	maritima := new(models.LogisticaMaritima)
@@ -44,12 +55,18 @@ func SaveMaritima(write http.ResponseWriter, request *http.Request) {
 	defer db.Close()
 
 	maritima = request.Context().Value("maritima").(*models.LogisticaMaritima)
+	if maritima.ID == nil {
+		if maritima.CantidadProducto > 10 {
+			maritima.PrecioEnvio = utils.Descuento(maritima.PrecioEnvio, 3)
+		}
+		maritima.NumeroGuia = utils.GenerateCode(10)
+	}
 
 	err := db.Save(maritima).Error
 
 	if err != nil {
 		log.Fatal(err)
-		common.SendError(write, http.StatusInternalServerError)
+		common.SendError(write, http.StatusInternalServerError) //500
 		return
 	}
 
@@ -66,7 +83,7 @@ func DeleteMaritima(write http.ResponseWriter, request *http.Request) {
 
 	db.Find(&maritima, id)
 
-	if &maritima.ID != nil {
+	if maritima.ID != nil {
 		db.Delete(maritima)
 		common.SendResponse(write, http.StatusOK, []byte(`{}`))
 	} else {

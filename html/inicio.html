@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="./inicio.html">
+                                <span data-feather="home"></span>
+                                Inicio
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./persona.html">
+                                <span data-feather="user"></span>
+                                Persona
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./maritima.html">
+                                <span data-feather="tag"></span>
+                                Logistica maritima
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./camion.html">
+                                <span data-feather="tag"></span>
+                                Logistica de camiones
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./index.html">
+                                <span data-feather="log-out"></span>
+                                Salir
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Página principal</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Bienvenido</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Navega con el meno de si izquierda =D</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"
+        integrity="sha512-JM10oJfLf9+1ntLBc1AnvHJ/YrC+xCnZwGMmkY6JnTX7V3qxbD/9p+zdT6hJU6FZU6NQ2PXLN/dnkKEvRd8Mlg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <script>
+        feather.replace();
+        function logOut() {
+            localStorage.removeItem('token');
+            window.location.href = "./index.html";
+        }
+    </script>
+</body>
+
+</html>
